@@ -1,4 +1,17 @@
-<script setup lang="ts"></script>
+<script>
+export default {
+  name: "Header",
+  props: ["counter"],
+
+  // setup(props) {
+  //   console.log(props.counter);
+  //   const counter = props.counter;
+  //   return {
+  //     counter,
+  //   };
+  // },
+};
+</script>
 
 <template>
   <div>
@@ -6,7 +19,7 @@
       <div class="header_wrapper">
         <span class="header_span">Осталось выполнить</span>
 
-        <span class="header_span2">0</span>
+        <span class="header_span2">{{ counter }}</span>
       </div>
     </header>
   </div>

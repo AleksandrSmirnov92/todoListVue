@@ -10,7 +10,14 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script>
+export default {
+  name: "Task",
+  setup() {
+    return {};
+  },
+};
+</script>
 
 <style scoped>
 .add_task_result {
@@ -19,7 +26,6 @@
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 20px;
-  /* overflow: hidden; */
 }
 .add_task_result1 {
   background-color: aliceblue;
@@ -27,7 +33,6 @@
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 20px;
-  /* overflow: hidden; */
 }
 .add_task_result2 {
   background-color: aliceblue;
@@ -35,7 +40,6 @@
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 20px;
-  /* overflow: hidden; */
 }
 .add_task_result_text {
   width: 50%;
