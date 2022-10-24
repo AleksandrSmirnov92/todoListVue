@@ -1,5 +1,5 @@
-<script>
-import { ref } from "vue";
+<script lang="ts">
+import { ref, reactive } from "vue";
 import Header from "./components/Header.vue";
 import MainMenu from "./components/MainMenu.vue";
 import Filter from "./components/Filter.vue";
@@ -14,23 +14,74 @@ export default {
     AllTasks,
   },
   setup() {
-    const counter = ref(0);
+    const state = reactive({
+      tasks: [
+        {
+          id: 5,
+          taskText: "привет!",
+          checkbox: false,
+        },
+        {
+          id: Math.random(),
+          taskText: "как дела?",
+          checkbox: false,
+        },
+      ],
+      counter: 0,
+      selectValue: "",
+    });
+    const inputText = ref("");
+
     const addNewTask = () => {
-      counter.value += 1;
+      if (!inputText.value.trim()) {
+        alert("Вы ничего не ввели!");
+      } else {
+        state.tasks.push({
+          id: Math.random(),
+          taskText: inputText.value,
+          checkbox: false,
+        });
+        state.counter += 1;
+        inputText.value = "";
+      }
+    };
+    const deleteTask = (id: number) => {
+      if (!state.tasks.find((item) => item.id === id)!.checkbox) {
+        state.counter -= 1;
+      }
+      state.tasks = state.tasks.filter((item) => item.id !== id);
+    };
+
+    const changeCheckbox = (id: number): void => {
+      state.tasks.find((item) => item.id === id)!.checkbox = !state.tasks.find(
+        (item) => item.id === id
+      )!.checkbox;
+      if (!state.tasks.find((item) => item.id === id)!.checkbox) {
+        state.counter += 1;
+      } else {
+        state.counter -= 1;
+      }
     };
     return {
-      counter,
+      state,
       addNewTask,
+      changeCheckbox,
+      deleteTask,
+      inputText,
     };
   },
 };
 </script>
 
 <template>
-  <Header :counter="counter" />
-  <MainMenu />
-  <Filter />
-  <AllTasks />
+  <Header :counter="state.counter" />
+  <MainMenu @addNewTask="addNewTask()" v-model.trim.lazy="inputText" />
+  <Filter v-model="state.selectValue" />
+  <AllTasks
+    :tasks="state.tasks"
+    :changeCheckbox="changeCheckbox"
+    :deleteTask="deleteTask"
+  />
 </template>
 
 <style scoped></style>

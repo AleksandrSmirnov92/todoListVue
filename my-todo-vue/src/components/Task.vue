@@ -1,23 +1,42 @@
-<template>
-  <div>
-    <div class="add_task_result1">
-      <span class="add_task_result_text_t"> какая то задача </span>
-      <div>
-        <input type="checkbox" />
-        <button class=".add_task_result_text_remove">удалить</button>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
+<script lang="ts">
 export default {
   name: "Task",
+  emits: ["changeCheckbox"],
+  props: ["task", "changeCheckbox", "deleteTask"],
   setup() {
     return {};
   },
 };
 </script>
+
+<template>
+  <div>
+    <div
+      class="add_task_result1"
+      :class="task!.checkbox ? 'add_task_chacked_color' : ''"
+    >
+      <span
+        class="add_task_result_text"
+        :class="task!.checkbox ? 'add_task_result_text_t' : ''"
+      >
+        {{ task!.taskText }}
+      </span>
+      <div>
+        <input
+          type="checkbox"
+          @click="changeCheckbox(task!.id)"
+          :checked="task!.checkbox "
+        />
+        <button
+          @click="deleteTask(task!.id)"
+          class="add_task_result_text_remove"
+        >
+          удалить
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .add_task_result {

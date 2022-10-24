@@ -1,18 +1,27 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "Filter",
+  emits: ["update:modelValue"],
+  props: {
+    modelValue: String,
+  },
+};
+</script>
 
 <template>
   <div>
     <div class="filter_block">
-      <select class="filter">
-        <option>Выбрать все</option>
-        <option>Выбрать активные</option>
-        <option>Выбрать законченные</option>
+      <select
+        class="filter"
+        @change="$emit('update:modelValue', $event.target.value)"
+      >
+        <option value="ALL" default>Выбрать все</option>
+        <option value="ActiveAll">Выбрать активные</option>
+        <option value="UnActiveAll">Выбрать законченные</option>
       </select>
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped>
 .filter_block {

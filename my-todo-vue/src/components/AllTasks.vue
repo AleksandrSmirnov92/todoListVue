@@ -2,10 +2,12 @@
 import Task from "./Task.vue";
 export default {
   name: "AllTasks",
-  comments: {
+  props: ["tasks", "changeCheckbox", "deleteTask"],
+
+  components: {
     Task,
   },
-  setup() {
+  setup(props) {
     return {
       Task,
     };
@@ -14,8 +16,12 @@ export default {
 </script>
 
 <template>
-  <div>
-    <Task />
+  <div v-for="task in tasks">
+    <Task
+      :task="task"
+      :changeCheckbox="changeCheckbox"
+      :deleteTask="deleteTask"
+    />
   </div>
 </template>
 

@@ -2,14 +2,6 @@
 export default {
   name: "Header",
   props: ["counter"],
-
-  // setup(props) {
-  //   console.log(props.counter);
-  //   const counter = props.counter;
-  //   return {
-  //     counter,
-  //   };
-  // },
 };
 </script>
 

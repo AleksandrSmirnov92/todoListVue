@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "MainManu",
+  emits: ["addNewTask", "update:modelValue"],
+  props: {
+    modelValue: String,
+  },
+};
+</script>
 
 <template>
   <div>
@@ -6,11 +14,14 @@
       <h1 class="add_task_text">Добавить задачу</h1>
       <div class="add_task_input_and_button">
         <input
+          @keyup.enter="$emit('addNewTask')"
+          @input="$emit('update:modelValue', $event.target.value)"
+          :value="modelValue"
           type="text"
           class="add_task_input"
           placeholder="Добавить задачу"
         />
-        <button class="button_add">
+        <button @click="$emit('addNewTask')" class="button_add">
           <span class="button_add_text"> Добавить </span>
         </button>
       </div>
