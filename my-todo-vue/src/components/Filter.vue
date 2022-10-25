@@ -15,7 +15,7 @@ export default {
         class="filter"
         @change="$emit('update:modelValue', $event.target.value)"
       >
-        <option value="ALL" default>Выбрать все</option>
+        <option value="ALL" selected>Выбрать все</option>
         <option value="ActiveAll">Выбрать активные</option>
         <option value="UnActiveAll">Выбрать законченные</option>
       </select>

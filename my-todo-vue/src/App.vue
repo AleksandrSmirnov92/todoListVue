@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, onUpdated } from "vue";
 import Header from "./components/Header.vue";
 import MainMenu from "./components/MainMenu.vue";
 import Filter from "./components/Filter.vue";
@@ -13,25 +13,32 @@ export default {
     Filter,
     AllTasks,
   },
+
   setup() {
-    const state = reactive({
-      tasks: [
-        {
-          id: 5,
-          taskText: "привет!",
-          checkbox: false,
-        },
-        {
-          id: Math.random(),
-          taskText: "как дела?",
-          checkbox: false,
-        },
-      ],
+    interface STATE {
+      tasks: {
+        id: number;
+        taskText: string;
+        checkbox: boolean;
+      }[];
+      counter: number;
+      selectValue: string;
+    }
+    let state: STATE = reactive({
+      tasks: [],
       counter: 0,
-      selectValue: "",
+      selectValue: "ALL",
     });
     const inputText = ref("");
-
+    onMounted(() => {
+      console.log("Компонент смонтирован");
+      if (localStorage.getItem("tasks")) {
+        state.tasks = JSON.parse(localStorage.getItem("tasks")!);
+      }
+      if (localStorage.getItem("counter")) {
+        state.counter = JSON.parse(localStorage.getItem("counter")!);
+      }
+    });
     const addNewTask = () => {
       if (!inputText.value.trim()) {
         alert("Вы ничего не ввели!");
@@ -62,6 +69,11 @@ export default {
         state.counter -= 1;
       }
     };
+
+    onUpdated(() => {
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      localStorage.setItem("counter", JSON.stringify(state.counter));
+    });
     return {
       state,
       addNewTask,
@@ -81,6 +93,7 @@ export default {
     :tasks="state.tasks"
     :changeCheckbox="changeCheckbox"
     :deleteTask="deleteTask"
+    :selectValue="state.selectValue"
   />
 </template>
 
