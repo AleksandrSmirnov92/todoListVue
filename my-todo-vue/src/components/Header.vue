@@ -7,30 +7,30 @@ export default {
 
 <template>
   <div>
-    <header class="header">
-      <div class="header_wrapper">
-        <span class="header_span">Осталось выполнить</span>
+    <header class="headerContainer">
+      <div class="headerWrapper">
+        <span class="headerSpanText">Осталось выполнить</span>
 
-        <span class="header_span2">{{ counter }}</span>
+        <span class="headerSpanCounter">{{ counter }}</span>
       </div>
     </header>
   </div>
 </template>
 
 <style scoped>
-.header {
+.headerContainer {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgb(102, 151, 2);
 }
-.header_wrapper {
+.headerWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.header_span {
+.headerSpanText {
   text-align: center;
   color: white;
   font-size: 25px;
@@ -38,7 +38,7 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.header_span2 {
+.headerSpanCounter {
   font-size: 30px;
   color: white;
   text-align: center;

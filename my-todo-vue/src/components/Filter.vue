@@ -10,9 +10,9 @@ export default {
 
 <template>
   <div>
-    <div class="filter_block">
+    <div class="filterContainer">
       <select
-        class="filter"
+        class="filterSelect"
         @change="$emit('update:modelValue', $event.target.value)"
       >
         <option value="ALL" selected>Выбрать все</option>
@@ -24,16 +24,15 @@ export default {
 </template>
 
 <style scoped>
-.filter_block {
+.filterContainer {
   background: #d1db3f;
   display: flex;
   justify-content: center;
   padding-top: 25px;
   padding-bottom: 10px;
 }
-.filter {
+.filterSelect {
   background-color: #db973f;
-
   font-size: 18px;
 }
 </style>

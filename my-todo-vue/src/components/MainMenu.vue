@@ -10,19 +10,19 @@ export default {
 
 <template>
   <div>
-    <div class="add_task">
-      <h1 class="add_task_text">Добавить задачу</h1>
-      <div class="add_task_input_and_button">
+    <div class="addTaskContainer">
+      <h1>Добавить задачу</h1>
+      <div class="addTaskWrapper">
         <input
           @keyup.enter="$emit('addNewTask')"
           @input="$emit('update:modelValue', $event.target.value)"
           :value="modelValue"
           type="text"
-          class="add_task_input"
+          class="addTaskInput"
           placeholder="Добавить задачу"
         />
-        <button @click="$emit('addNewTask')" class="button_add">
-          <span class="button_add_text"> Добавить </span>
+        <button @click="$emit('addNewTask')" class="addTaskButton">
+          <span class="buttonText"> Добавить </span>
         </button>
       </div>
     </div>
@@ -30,21 +30,21 @@ export default {
 </template>
 
 <style scoped>
-.add_task {
+.addTaskContainer {
   display: flex;
   flex-direction: column;
   background-color: rgb(44, 136, 44);
 
   align-items: center;
 }
-.add_task_text {
+h1 {
   color: white;
 }
-.add_task_input_and_button {
+.addTaskWrapper {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.add_task_input {
+.addTaskInput {
   text-align: center;
   background-color: #d1db3f;
   border: none;
@@ -52,12 +52,12 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.button_add {
+.addTaskButton {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #db973f;
 }
-.button_add_text {
+.buttonText {
   font-size: 15px;
 }
 </style>

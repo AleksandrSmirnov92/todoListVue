@@ -15,6 +15,7 @@ export default {
   },
 
   setup() {
+    const inputText = ref("");
     interface STATE {
       tasks: {
         id: number;
@@ -29,9 +30,7 @@ export default {
       counter: 0,
       selectValue: "ALL",
     });
-    const inputText = ref("");
     onMounted(() => {
-      console.log("Компонент смонтирован");
       if (localStorage.getItem("tasks")) {
         state.tasks = JSON.parse(localStorage.getItem("tasks")!);
       }
@@ -52,7 +51,7 @@ export default {
         inputText.value = "";
       }
     };
-    const deleteTask = (id: number) => {
+    const deleteTask = (id: number): void => {
       if (!state.tasks.find((item) => item.id === id)!.checkbox) {
         state.counter -= 1;
       }

@@ -7,11 +7,6 @@ export default {
   components: {
     Task,
   },
-  setup(props) {
-    return {
-      Task,
-    };
-  },
 };
 </script>
 
